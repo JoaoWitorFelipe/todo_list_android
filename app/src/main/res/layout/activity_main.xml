@@ -13,33 +13,30 @@
         android:layout_marginTop="250dp"
         android:scrollbars="vertical" />
 
-    <Button
-        android:id="@+id/buttonAddTodo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
-        android:text="@string/add_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextTodo"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/editTextTodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="184dp"
         android:layout_marginRight="184dp"
+        android:autofillHints=""
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/write_your_todo"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/my_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonAddTodo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_button"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTodo"
+        app:layout_constraintStart_toEndOf="@+id/editTextTodo"
+        app:layout_constraintTop_toTopOf="@+id/editTextTodo"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
