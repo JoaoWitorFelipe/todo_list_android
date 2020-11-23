@@ -7,4 +7,6 @@
     <string name="input_todo">Write your todo</string>
     <string name="input_to_write_todo">Input to write todo</string>
     <string name="write_your_todo">Write your todo</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
 </resources>

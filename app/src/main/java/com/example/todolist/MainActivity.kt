@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -49,23 +50,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun deleteItemFromList(position: Int) {
-        println(position)
         myDataSet.removeAt(position)
         viewAdapter.notifyItemRemoved(position)
     }
 
     class MyAdapter(private var myDataSet: ArrayList<String>, private var deleteItemFromList: (position: Int) -> Unit) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-        class MyViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
+        class MyViewHolder(val row: ConstraintLayout) : RecyclerView.ViewHolder(row)
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val textView = LayoutInflater.from(parent.context).inflate(R.layout.my_text_view,
-                    parent, false) as TextView
-            return MyViewHolder(textView)
+            val row = LayoutInflater.from(parent.context).inflate(R.layout.my_text_view,
+                    parent, false) as ConstraintLayout
+            return MyViewHolder(row)
         }
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-            holder.textView.setOnClickListener { deleteItemFromList(holder.adapterPosition) }
-            holder.textView.text = myDataSet[position]
+            holder.row.findViewById<Button>(R.id.btn_item_delete).setOnClickListener { deleteItemFromList(holder.adapterPosition) }
+            holder.row.findViewById<TextView>(R.id.my_text_view).text = myDataSet[position]
         }
 
         override fun getItemCount(): Int = myDataSet.size
