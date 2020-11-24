@@ -9,4 +9,6 @@
     <string name="write_your_todo">Write your todo</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="button_edit">EDIT</string>
+    <string name="button_cancel">Cancel</string>
 </resources>
