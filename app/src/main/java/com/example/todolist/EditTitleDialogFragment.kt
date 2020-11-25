@@ -3,6 +3,7 @@ package com.example.todolist
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,14 +28,18 @@ class EditTitleDialogFragment(private val todoItem: TodoItem) : DialogFragment()
             val builder = AlertDialog.Builder(it)
 
             val inflater = requireActivity().layoutInflater;
+            val view: View = inflater.inflate(R.layout.fragment_edit_title_dialog, null)
 
-            val inputEditText = it.findViewById<EditText>(R.id.editTitleDialog)
+            val inputEditText = view.findViewById<EditText>(R.id.editTitleDialog)
             inputEditText.setText(todoItem.title)
 
-            builder.setView(inflater.inflate(R.layout.fragment_edit_title_dialog, null))
+
+            builder.setView(view)
                     .setPositiveButton(R.string.button_edit,
                             DialogInterface.OnClickListener { _, _ ->
-                                // sign in the user ...
+                                val textEdited = inputEditText.text.toString()
+                                val todoItem = TodoItem(textEdited)
+
                             })
                     .setNegativeButton(R.string.button_cancel,
                             DialogInterface.OnClickListener { dialog, _ ->
