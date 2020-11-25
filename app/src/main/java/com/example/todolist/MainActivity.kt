@@ -1,5 +1,6 @@
 package com.example.todolist
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private val myDataSet: ArrayList<TodoItem> = arrayListOf(TodoItem("Finalize this project"))
+    private var myDataSet: ArrayList<TodoItem> = arrayListOf(TodoItem("Finalize this project"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,13 +59,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openEditAlertDialog(position: Int) {
-        val todoItem = myDataSet[position];
-        val alertDialog = EditTitleDialogFragment(todoItem)
+        val alertDialog = AlertDialog.Builder(this)
 
-        alertDialog.setTargetFragment(alertDialog, 0)
-        alertDialog.show(supportFragmentManager, "EditTitleDialog")
+        val view = LayoutInflater.from(this).inflate(R.layout.fragment_edit_title_dialog,
+                null, false)
 
-        alertDialog.
+        alertDialog.setTitle("Edit title")
+        alertDialog.setView(view)
+
+
+        val inputEditText = view.findViewById<EditText>(R.id.editTitleDialog)
+
+        val itemToEditTitle = myDataSet[position]
+        inputEditText.setText(itemToEditTitle.title)
+
+        alertDialog.setPositiveButton("EDIT", DialogInterface.OnClickListener { _,_ ->
+            itemToEditTitle.title = inputEditText.text.toString()
+            viewAdapter.notifyItemChanged(position)
+        })
+
+
+        alertDialog.show();
+
     }
 
     class MyAdapter(
